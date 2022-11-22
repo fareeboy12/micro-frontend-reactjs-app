@@ -6,7 +6,7 @@ const filesPayloadExists = require('../middleware/filePayloadExists');
 const fileExtLimiter = require('../middleware/fileExtLimiter');
 const fileSizeLimiter = require('../middleware/fileSizeLimiter');
 
-router.route('/').get(getAllProducts).post(fileUpload({createParentPath: true}), filesPayloadExists, setProduct)
+router.route('/').get(getAllProducts).post(fileUpload({createParentPath: true}), filesPayloadExists, fileExtLimiter(['.png', '.jpg', '.jpeg']), fileSizeLimiter, setProduct)
 
 
  
