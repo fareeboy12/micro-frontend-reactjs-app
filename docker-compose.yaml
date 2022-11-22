@@ -1,0 +1,63 @@
+version: '2.12.1'
+
+services:
+
+  parent:
+    build:
+      context: parent
+      dockerfile: ./Dockerfile
+
+    ports:
+      - "3005:3005"
+    links:
+      - storeone
+      - storetwo
+    
+    volumes:
+        - ./:/mnt/locust
+    
+    command: -f /mnt/locust/locust.py --master -H http://localhost:8089
+  
+  storeone:
+    build:
+      context: storeone
+      dockerfile: ./Dockerfile
+
+    ports:
+      - "3006:3006"
+    
+    volumes:
+        - ./:/mnt/locust
+    
+    command: -f /mnt/locust/locust.py --worker --master-host parent
+  
+  storetwo:
+    build:
+      context: storetwo
+      dockerfile: ./Dockerfile
+
+    ports:
+      - "3007:3007"
+    
+    volumes:
+        - ./:/mnt/locust
+
+    command: -f /mnt/locust/locust.py --worker --master-host parent
+# services:
+#   master:
+#     image: parent
+#     ports:
+#      - "3005:3005"
+#     command: locust.py --master -H http://localhost:3005
+  
+#   worker1:
+#     image: storeonenew
+#     ports:
+#      - "3006:3006"
+#     command: locust.py --worker --master-host master
+
+#   worker2:
+#     image: storetwonew
+#     ports:
+#      - "3007:3007"
+#     command: locust.py --worker --master-host master

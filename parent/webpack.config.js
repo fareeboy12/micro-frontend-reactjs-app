@@ -46,6 +46,7 @@ module.exports = {
       remotes: {
         storeone : "storeone@http://localhost:3006/remoteEntry.js",
         storetwo : "storetwo@http://localhost:3007/remoteEntry.js",
+        addproduct : "addproduct@http://localhost:3008/remoteEntry.js",
       },
       exposes: {},
       shared: {

@@ -14,8 +14,9 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-auto">
-                    <Link to="/storeOne" className="text-white btn btn-primary ms-3 my-2">Store One</Link>
-                    <Link to="/storeTwo" className="text-white btn btn-primary ms-3 my-2">Store Two</Link>
+                    <Link to="/storeOne" className="text-white btn btn-primary ms-3 my-2">All Products</Link>
+                    {/* <Link to="/storeTwo" className="text-white btn btn-primary ms-3 my-2">Store Two</Link> */}
+                    <Link to="/addProduct" className="text-white btn btn-primary ms-3 my-2">Add Product</Link>
                 </Nav>
             </Navbar.Collapse>
         </Container>

@@ -1,7 +1,13 @@
 FROM node:alpine
+
 WORKDIR /
-COPY ./package.json .
+
+COPY ./package*.json .
+
 RUN npm install
+
 COPY . .
-EXPOSE 3005
+
+# COPY . .
+# EXPOSE 3005
 CMD ["npm", "start"]

@@ -10,28 +10,26 @@ const RestAPI = () => {
   
     useEffect(() => {
       const getProducts = async () => {
-        const res = await axios(
-          `https://dummyjson.com/products?skip=0&limit=50`
-        );
-
-        console.log(res.data.products);
-        setProducts(res.data.products);
+        const res = await axios.get(`http://localhost:5000/api/products/`);
+        console.log(res)
+        setProducts(res.data);
       };
-  
+    
       getProducts();
     }, []);
+
 
   return (
     <>
       <Container className="my-5">
-        <h1 className="mt-5">Store One</h1>
+        <h1 className="mt-5">Products</h1>
         <Row>
         {products.map((data) => (
-            <Col md={4} className="mt-5">
-                <Card key={data?.id} id={data?.id} className="w-100">
+            <Col md={4} className="mt-5" key={data?._id}>
+                <Card className="w-100">
                     <Card.Img variant="top" src={data?.thumbnail} height={300}/>
                     <Card.Body>
-                        <Card.Text>{data?.description}</Card.Text>
+                        <Card.Text>{data?.title}</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>

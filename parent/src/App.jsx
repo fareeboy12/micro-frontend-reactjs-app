@@ -5,7 +5,8 @@ import Header from "./components/Header";
 import 'bootstrap/dist/css/bootstrap.css';
 import Welcome from "./components/Welcome";
 import StoreOne from "./components/StoreOne";
-import StoreTwo from "./components/StoreTwo";
+// import StoreTwo from "./components/StoreTwo";
+import AddProduct from "./components/AddProduct";
 
 const App = () => { 
 
@@ -16,7 +17,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/storeOne" element={<StoreOne />} />
-        <Route path="/storeTwo" element={<StoreTwo />} />
+        {/* <Route path="/storeTwo" element={<StoreTwo />} /> */}
+        <Route path="/addProduct" element={<AddProduct />} />
       </Routes>
     </BrowserRouter>
   </div>
