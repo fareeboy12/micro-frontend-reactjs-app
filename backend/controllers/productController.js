@@ -21,6 +21,10 @@ const setProduct = asyncHandler(async (req, res) => {
         throw new Error('Please add all fields')
     }
     else{
+
+        const file = req.files.thumbnail;
+        const fileName = file.name;
+
         const files = req.files;
         let filepath;
         Object.keys(files).forEach(key => {
@@ -30,10 +34,11 @@ const setProduct = asyncHandler(async (req, res) => {
             })
         })
 
-        console.log(Object.keys(files).toString())
+        
+        // console.log(files.file.md5)
         const product = await Products.create({
             title: req.body.title,
-            thumbnail: filepath,
+            thumbnail: "http://localhost:5000/files/" + fileName,
         })
     
         res.status(200).json(product)
