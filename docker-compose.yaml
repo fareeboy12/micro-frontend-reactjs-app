@@ -1,48 +1,70 @@
-version: '2.12.1'
+version: '3'
 
 services:
+
+  backend:
+    build:
+      context: backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
 
   parent:
     build:
       context: parent
       dockerfile: ./Dockerfile
-
     ports:
-      - "3005:3005"
-    links:
-      - storeone
-      - storetwo
-    
-    volumes:
-        - ./:/mnt/locust
-    
-    command: -f /mnt/locust/locust.py --master -H http://localhost:8089
+      - 3005:3005
   
   storeone:
     build:
       context: storeone
       dockerfile: ./Dockerfile
-
     ports:
-      - "3006:3006"
-    
-    volumes:
-        - ./:/mnt/locust
-    
-    command: -f /mnt/locust/locust.py --worker --master-host parent
-  
-  storetwo:
+      - 3006:3006
+
+  addproduct:
     build:
-      context: storetwo
+      context: addproduct
       dockerfile: ./Dockerfile
-
     ports:
-      - "3007:3007"
-    
-    volumes:
-        - ./:/mnt/locust
+      - 3008:3008
 
-    command: -f /mnt/locust/locust.py --worker --master-host parent
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8080:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+
+volumes:
+  mongo-data:
+    driver: local
+
+  # storetwo:
+  #   build:
+  #     context: storetwo
+  #     dockerfile: ./Dockerfile
+
+  #   ports:
+  #     - "3007:3007"
+    
+  #   volumes:
+  #       - ./:/mnt/locust
+
+  #   command: -f /mnt/locust/locust.py --worker --master-host parent
 # services:
 #   master:
 #     image: parent
