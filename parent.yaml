@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microfrontend-parent-deployment
+  labels:
+    app: microfrontend-parent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microfrontend-parent
+  template:
+    metadata:
+      labels:
+        app: microfrontend-parent
+    spec:
+      containers:
+      - name: microfrontend-parent
+        image: microfrontend-parent
+        ports:
+        - containerPort: 3005

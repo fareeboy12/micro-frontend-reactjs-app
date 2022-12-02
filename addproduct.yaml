@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microfrontend-addproduct-deployment
+  labels:
+    app: microfrontend-addproduct
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microfrontend-addproduct
+  template:
+    metadata:
+      labels:
+        app: microfrontend-addproduct
+    spec:
+      containers:
+      - name: microfrontend-addproduct
+        image: microfrontend-addproduct
+        ports:
+        - containerPort: 3008

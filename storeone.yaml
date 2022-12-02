@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microfrontend-storeone-deployment
+  labels:
+    app: microfrontend-storeone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microfrontend-storeone
+  template:
+    metadata:
+      labels:
+        app: microfrontend-storeone
+    spec:
+      containers:
+      - name: microfrontend-storeone
+        image: microfrontend-storeone
+        ports:
+        - containerPort: 3006
