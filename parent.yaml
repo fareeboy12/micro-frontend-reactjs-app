@@ -16,6 +16,21 @@ spec:
     spec:
       containers:
       - name: microfrontend-parent
-        image: microfrontend-parent
+        image: fareeboy12/microfrontend-parent
+        imagePullPolicy: Always
         ports:
         - containerPort: 3005
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: parent-service
+spec:
+  selector:
+    app: microfrontend-parent
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3005
+      targetPort: 3005
+      nodePort: 30082

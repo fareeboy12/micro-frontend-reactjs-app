@@ -16,6 +16,21 @@ spec:
     spec:
       containers:
       - name: microfrontend-addproduct
-        image: microfrontend-addproduct
+        image: fareeboy12/microfrontend-addproduct
+        imagePullPolicy: Always
         ports:
         - containerPort: 3008
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: addproduct-service
+spec:
+  selector:
+    app: microfrontend-addproduct
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3008
+      targetPort: 3008
+      nodePort: 30081
